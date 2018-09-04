@@ -6,11 +6,12 @@ Repository about the OS course
 
 * Build the Dockerfile to create a Image of our Dockerfile
 
-"""
+```
 $ docker build -t webappos .
-"""
+```
 
 * Run the docker image
-"""
+
+```
 $ docker run -it webappos
-"""
+```
