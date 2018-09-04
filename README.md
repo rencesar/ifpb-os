@@ -13,5 +13,5 @@ $ docker build -t webappos .
 * Run the docker image
 
 ```
-$ docker run -it webappos
+$ docker run -it -p 80:8000 webappos
 ```
