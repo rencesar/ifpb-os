@@ -1,16 +1,31 @@
-FROM debian:9.5
+# pull official base image
+FROM python:3.7-alpine
 
-RUN apt-get update
-RUN apt-get install python3 python3-setuptools git python3-dev postgresql python3-pip -y
+# set environment varibles
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-WORKDIR /app
+# set work directory
+WORKDIR /usr/src/app
 
-COPY ./ /app
+# install psycopg2
+RUN apk update \
+    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add postgresql-dev \
+    && pip install psycopg2 \
+    && apk del build-deps
 
-RUN pip3 install -r requirements/dev.txt
+# install dependencies
+RUN pip install --upgrade pip
+RUN pip install pipenv
+COPY ./Pipfile /usr/src/app/Pipfile
+RUN pipenv install --skip-lock --system --dev
 
-EXPOSE 8000
+# copy entrypoint.sh
+COPY ./entrypoint.sh /usr/src/entrypoint.sh
 
-RUN python3 manage.py migrate
+# copy project
+COPY ./app/ /usr/src/app/
 
-CMD python3 manage.py runserver 0.0.0.0:8000
+# run entrypoint.sh
+ENTRYPOINT ["sh", "/usr/src/entrypoint.sh"]
