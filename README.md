@@ -8,8 +8,13 @@ This application works with Docker Compose, thereupon We first need to install D
 
 ### Installing Docker
 
-Following this tutorial you can install docker:
-  https://docs.docker.com/install/linux/docker-ce/debian/
+1. Following this tutorial you can install docker:
+    https://docs.docker.com/install/linux/docker-ce/debian/
+
+1. Install docker Compose
+  ```
+  $ apt-get install docker-compose
+  ```
   
 ### Pulling the code
 
@@ -25,6 +30,8 @@ $ git clone https://github.com/rencesar/ifpb-os.git
 ```
 
 ### Starting App
+
+1. Access Project Folder
 
 1. Generate your Django Secret Key
     * Access this [link](https://www.miniwebtool.com/django-secret-key-generator/) and generate your secret key
