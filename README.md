@@ -12,9 +12,7 @@ This application works with Docker Compose, thereupon We first need to install D
     https://docs.docker.com/install/linux/docker-ce/debian/
 
 1. Install docker Compose
-  ```
-  $ apt-get install docker-compose
-  ```
+    https://docs.docker.com/compose/install/
   
 ### Pulling the code
 
@@ -39,12 +37,13 @@ $ git clone https://github.com/rencesar/ifpb-os.git
 1. Add environment variables
     * You can add them permanently
         ```
-        $ echo 'export DJANGO_SECRET_KEY=[PUT YOUR SECRET KEY HERE WITHOUT THE SQUARED BRACKETS]' >> ~/.bashrc
+        $ echo 'export DJANGO_SECRET_KEY="PUT YOUR SECRET KEY HERE"' >> ~/.bashrc
         ```
+        Be aware that if you go with this option you must restart your terminal.
 
     * or temporarily
         ```
-        $ export DJANGO_SECRET_KEY=[PUT YOUR SECRET KEY HERE WITHOUT THE SQUARED BRACKETS
+        $ export DJANGO_SECRET_KEY="PUT YOUR SECRET KEY HERE"
         ```
 1. Change file permissions
     ```
@@ -56,6 +55,8 @@ $ git clone https://github.com/rencesar/ifpb-os.git
     ```
     $ docker-compose up --build
     ```
+1. Access the page
+    Open your browser and go to http://127.0.0.1
     
 ## Info
 
