@@ -61,3 +61,20 @@ $ git clone https://github.com/rencesar/ifpb-os.git
 ## Info
 
 This application works Django(Web App), Postgres(DataBase), Nginx(Http Server), Docker Compose, Docker.
+
+## Activities
+
+### Activities 3
+
+* Monitoring application
+Knowing that this is a Web application We can not use time on the server because the idea is that it will be running all the time, so what We are going to do here is use `curl` to measure the response of the server.
+
+1. With Empty database:
+    ```
+    $ time curl -X GET http://127.0.0.1/section/
+    []
+    real 0m0.021s
+    user 0m0.004s
+    sys  0m0.000s
+    ```
+2. Pushing data to the database
