@@ -11,3 +11,9 @@ def section_list(request):
         return Response(
             SectionSerializer(queryset, many=True).data
         )
+    elif request.method == 'POST':
+        serializer = SectionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
