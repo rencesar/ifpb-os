@@ -118,8 +118,13 @@ Knowing that this is a Web application We can not use time on the server because
 
 ![TOP command result](/info/images/top.png)
 
+You can check that docker-compose and gunicorn are using arround 1.4% for docker-compose and 1.7% for gunicorn, of memory and both are using 0.3% of the CPU.
+But what is gunicorn? Gunicorn is a Python WSGI HTTP Server for UNIX, in the end my webapp.
+
+
 * Monitoring with `strace`
 
+ - Strace on Getting data
 ```
 % time     seconds  usecs/call     calls    errors syscall
 ------ ----------- ----------- --------- --------- ----------------
@@ -159,5 +164,43 @@ Knowing that this is a Web application We can not use time on the server because
 100.00    0.000000                   400        46 total
 ```
 
-You can check that docker-compose and gunicorn are using arround 1.4% for docker-compose and 1.7% for gunicorn, of memory and both are using 0.3% of the CPU.
-But what is gunicorn? Gunicorn is a Python WSGI HTTP Server for UNIX, in the end my webapp.
+ - Strace on Inserting data
+
+```
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+  0.00    0.000000           0        37           read
+  0.00    0.000000           0         1           write
+  0.00    0.000000           0        42         6 open
+  0.00    0.000000           0        40           close
+  0.00    0.000000           0         4         4 stat
+  0.00    0.000000           0        37           fstat
+  0.00    0.000000           0         6           poll
+  0.00    0.000000           0        84           mmap
+  0.00    0.000000           0        68           mprotect
+  0.00    0.000000           0         1           munmap
+  0.00    0.000000           0         6           brk
+  0.00    0.000000           0        24           rt_sigaction
+  0.00    0.000000           0         1           rt_sigprocmask
+  0.00    0.000000           0         1           ioctl
+  0.00    0.000000           0        35        35 access
+  0.00    0.000000           0         1           pipe
+  0.00    0.000000           0         2           socket
+  0.00    0.000000           0         1         1 connect
+  0.00    0.000000           0         1           sendto
+  0.00    0.000000           0         1           recvfrom
+  0.00    0.000000           0         1           getsockname
+  0.00    0.000000           0         1           getpeername
+  0.00    0.000000           0         4           setsockopt
+  0.00    0.000000           0         1           getsockopt
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         2           fcntl
+  0.00    0.000000           0         1           getrlimit
+  0.00    0.000000           0         1           arch_prctl
+  0.00    0.000000           0         1           futex
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           set_robust_list
+  0.00    0.000000           0         1           getrandom
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000000                   409        46 total
+```
